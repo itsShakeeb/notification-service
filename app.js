@@ -12,6 +12,8 @@ app.use(express.json())
 
 
 app.get('/', (req, res) => {
+  console.log('All Ok');
+  
   res.status(200).json({ ok: true });
 });
 
