@@ -1,5 +1,5 @@
 const redisClient = require('../config/redis')
-const { createNotification } = require('../services/notificationService')
+const { createNotification, markAsRead } = require('../services/notificationService')
 
 async function subscribeToRedisEvents(io) {
     await redisClient.subscribe('order.created', async (message) => {
@@ -15,6 +15,15 @@ async function subscribeToRedisEvents(io) {
         console.log({newNotification: notification});
         
         io.to(data.userId).emit('new_notification', notification)
+    })
+
+    await redisClient.subscribe('order.notification.status.updated', async (message) => {
+        const data = JSON.parse(message);
+        console.log({data});
+        
+        const notification = await markAsRead(data.notificationId)
+        
+        io.to(data.userId).emit('notification_status_updated', notification)
     })
 }
 

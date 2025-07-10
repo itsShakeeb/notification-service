@@ -1,0 +1,81 @@
+Stakeholders:
+
+1. 🧑‍🍳 Restaurant
+2. 🚗 Delivery Partner
+3. 👨‍🍳 Customer
+4. 📦 Operations/Admin
+
+🟢 BASIC FEATURES (MUST HAVE)
+
+| Feature                             | Description                                    | Target User        |
+| ----------------------------------- | ---------------------------------------------- | ------------------ |
+| 🔔 Create & Read Notifications      | REST APIs to send and view notifications       | All                |
+| 📩 Event-based Triggering           | Order created, accepted, dispatched, delivered | Customer, Delivery |
+| 🕓 Read Status / Seen               | Mark notifications as read or unread           | All                |
+| 🗂️ Notification Types & Categories  | Info, alert, promo, transactional, etc.        | All                |
+| 📄 MongoDB Storage                  | Store notifications for history/audit          | All                |
+
+🟡 INTERMEDIATE FEATURES (PRODUCT-GRADE)
+| Feature                           | Description                                             | Value                |
+| --------------------------------- | ------------------------------------------------------- | -------------------- |
+| 📱 Real-time delivery (Socket.IO) | Push live status updates: "Your food is being prepared" | Fast UX              |
+| 🎯 User Preferences               | Opt-in/out for promo, push, SMS, etc.                   | Personalization      |
+| 🔁 Retry Mechanism                | Retry real-time or async delivery if failed             | Reliability          |
+| 📬 Multichannel Support           | Push, email, SMS                                        | Wider reach          |
+| 🧠 Template-based Notification    | Predefined title/body with variables                    | Consistency & i18n   |
+| 🧪 Scheduled Notifications        | "Rate your order", "20% off tonight"                    | Engagement           |
+| 📊 Notification History API       | Paginated fetch of past notifications                   | Traceability         |
+| 📍 Geo-targeted notifications     | Notify only users in a region (e.g., surge alerts)      | Contextual targeting |
+
+🟠 ADVANCED FEATURES (SCALABLE / GROWTH)
+| Feature                        | Description                                         | Impact          |
+| ------------------------------ | --------------------------------------------------- | --------------- |
+| 🗳️ A/B Testing & Experiments  | Test which messages convert better                  | Product growth  |
+| 🧠 AI/ML-based Smart Delivery  | Best time to notify a user (like 7 PM vs 11 AM)     | Retention       |
+| 🛑 Rate Limiting & Throttling  | Avoid flooding user with too many messages          | UX protection   |
+| 📊 Analytics Dashboard         | Graphs for delivery success, click-through rate     | Product insight |
+| 🧩 Distributed Queue Workers   | For scaling notification delivery (BullMQ/RabbitMQ) | Performance     |
+| 🕵️‍♂️ Trace IDs for Debugging | For tracking notifications end-to-end               | Observability   |
+| 🌐 Multi-language/i18n support | Show messages in user’s language                    | Global reach    |
+| 🤝 Notification Rules Engine   | Event → Rule → Action mapping via config            | Flexibility     |
+
+🔀 Examples of Event-Driven Notification Flows
+✅ Customer Notifications:
+
+| Event           | Notification                                       |
+| --------------- | -------------------------------------------------- |
+| Order Placed    | "Thanks! Your order has been placed."              |
+| Order Confirmed | "Restaurant has confirmed your order."             |
+| Order Picked    | "Your food is on the way. Delivery partner: John." |
+| Delivered       | "Enjoy your meal! Let us know how it was."         |
+| Promo Launched  | "Get 30% off on pizza today 🍕"                    |
+
+✅ Delivery Partner Notifications:
+| Event              | Notification                                     |
+| ------------------ | ------------------------------------------------ |
+| New Assignment     | "New delivery request: Order #12345"             |
+| Delivery Cancelled | "Order #12345 has been cancelled."               |
+| Incentive          | "Complete 3 more deliveries today to earn ₹500!" |
+
+✅ Restaurant Notifications:
+| Event             | Notification                                   |
+| ----------------- | ---------------------------------------------- |
+| New Order         | "You received a new order. Prepare it ASAP."   |
+| Late Pickup Alert | "Order #123 is waiting too long to be picked." |
+
+🧩 Next Feature Suggestions to Build
+Based on your current setup, here’s what you can build next (in order):
+
+1.🔖 Notification templates system (e.g., Your food is being prepared by {{restaurantName}})
+2.🔔 Multichannel delivery layer (add SMS or email alongside Socket.IO)
+3.👤 User preferences storage and respect logic
+4.💬 WebSocket notification retry fallback (retry if user disconnected)
+5.📆 Scheduled notification dispatching (like rating reminders)
+6.🧪 A/B test support (mark which template version was used)
+
+✅ Summary Table: Basic to Advanced
+| Level           | Focus Area                        | Key Value                  |
+| --------------- | --------------------------------- | -------------------------- |
+| 🟢 Basic        | REST + Events + Real-time         | Functionality              |
+| 🟡 Intermediate | Personalization + Channels        | Product-grade UX           |
+| 🟠 Advanced     | Smartness + Observability + Scale | Growth, Retention, Scaling |
